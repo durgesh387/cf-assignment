@@ -1,0 +1,108 @@
+{
+	"AWSTemplateFormatVersion" : "2010-09-09",
+	"Transform" : "AWS::Serverless-2016-10-31",
+	"Description" : "An AWS Serverless Application.",
+
+	"Resources" : {
+
+		"Get" : {
+			"Type" : "AWS::Serverless::Function",
+			"Properties": {
+				"Handler": "AssignmentLambda::AssignmentLambda.Functions::Get",
+				"Runtime": "dotnetcore2.1",
+				"CodeUri": "",
+				"Description": "Function to get an employee by id",
+				"MemorySize": 256,
+				"Timeout": 30,
+				"Role": null,
+				"Policies": [ "AWSLambdaBasicExecutionRole" ],
+				"Events": {
+					"RootGet": {
+						"Type": "Api",
+						"Properties": {
+							"Path": "/",
+							"Method": "GET"
+						}
+					}
+				}
+			}
+		}
+
+		"Create" : {
+			"Type" : "AWS::Serverless::Function",
+			"Properties": {
+				"Handler": "AssignmentLambda::AssignmentLambda.Functions::Create",
+				"Runtime": "dotnetcore2.1",
+				"CodeUri": "",
+				"Description": "Function to create an employee",
+				"MemorySize": 256,
+				"Timeout": 30,
+				"Role": null,
+				"Policies": [ "AWSLambdaBasicExecutionRole" ],
+				"Events": {
+					"RootGet": {
+						"Type": "Api",
+						"Properties": {
+							"Path": "/",
+							"Method": "POST"
+						}
+					}
+				}
+			}
+		}
+
+		"Update" : {
+			"Type" : "AWS::Serverless::Function",
+			"Properties": {
+				"Handler": "AssignmentLambda::AssignmentLambda.Functions::Get",
+				"Runtime": "dotnetcore2.1",
+				"CodeUri": "",
+				"Description": "Function to update an employee by id",
+				"MemorySize": 256,
+				"Timeout": 30,
+				"Role": null,
+				"Policies": [ "AWSLambdaBasicExecutionRole" ],
+				"Events": {
+					"RootGet": {
+						"Type": "Api",
+						"Properties": {
+							"Path": "/",
+							"Method": "PUT"
+						}
+					}
+				}
+			}
+		}
+
+		"Delete" : {
+			"Type" : "AWS::Serverless::Function",
+			"Properties": {
+				"Handler": "AssignmentLambda::AssignmentLambda.Functions::Get",
+				"Runtime": "dotnetcore2.1",
+				"CodeUri": "",
+				"Description": "Function to delete an employee by id",
+				"MemorySize": 256,
+				"Timeout": 30,
+				"Role": null,
+				"Policies": [ "AWSLambdaBasicExecutionRole" ],
+				"Events": {
+					"RootGet": {
+						"Type": "Api",
+						"Properties": {
+							"Path": "/",
+							"Method": "DELETE"
+						}
+					}
+				}
+			}
+		}
+
+	},
+
+	"Outputs" : {
+		"ApiURL" : {
+			"Description" : "API endpoint URL for Prod environment",
+			"Value" : { "Fn::Sub" : "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/" }
+		}
+	}
+}
