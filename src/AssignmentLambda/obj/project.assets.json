@@ -2176,11 +2176,12 @@
       ]
     },
     "System.Reflection.Emit/4.0.1": {
-      "sha512": "P2wqAj72fFjpP6wb9nSfDqNBMab+2ovzSDzUZK7MVIm54tBJEPr9jWfSjjoTpPwj1LeKcmX3vr0ttyjSSFM47g==",
+      "sha512": "/3dmiGuUUUjqZaSeTdxkgzY0De8sLpS4J3tYRETskSbZaRjwvL62IBalMGI6iczZ6udJ1iBlsBBYOHtdCfx90Q==",
       "type": "package",
       "path": "system.reflection.emit/4.0.1",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3378,23 +3379,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\naveen.chandra\\.nuget\\packages\\": {},
+    "C:\\Users\\durgesh.yadav\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\cf-assignment\\src\\AssignmentLambda\\AssignmentLambda.csproj",
+      "projectUniqueName": "D:\\trial-projects\\AssignmentLambda\\src\\AssignmentLambda\\AssignmentLambda.csproj",
       "projectName": "AssignmentLambda",
-      "projectPath": "D:\\projects\\cf-assignment\\src\\AssignmentLambda\\AssignmentLambda.csproj",
-      "packagesPath": "C:\\Users\\naveen.chandra\\.nuget\\packages\\",
-      "outputPath": "D:\\projects\\cf-assignment\\src\\AssignmentLambda\\obj\\",
+      "projectPath": "D:\\trial-projects\\AssignmentLambda\\src\\AssignmentLambda\\AssignmentLambda.csproj",
+      "packagesPath": "C:\\Users\\durgesh.yadav\\.nuget\\packages\\",
+      "outputPath": "D:\\trial-projects\\AssignmentLambda\\src\\AssignmentLambda\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\naveen.chandra\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\durgesh.yadav\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
