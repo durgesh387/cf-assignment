@@ -5,7 +5,7 @@ namespace AssignmentLambda
 {
     public interface IEmployeeRepository
     {
-        Task CreateEmployeeAsync(Employee employee);
+        Task<int> CreateEmployeeAsync(Employee employee);
         Task UpdateEmployeeAsync(int employeeId, Employee employee);
         Task DeleteEmployeeAsync(int employeeId);
         Task<Employee> GetEmployeeAsync(int employeeId);

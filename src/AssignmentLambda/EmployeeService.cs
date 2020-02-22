@@ -7,53 +7,34 @@ namespace AssignmentLambda
 {
     public class EmployeeService : IEmployeeService
     {
-        IEmployeeRepository _repository = new EmployeeRepository();
-        public async Task CreateEmployeeAsync(Employee employee)
+        private readonly IEmployeeRepository _repository = new EmployeeRepository();
+        public async Task<int> CreateEmployeeAsync(Employee employee)
         {
-            try
-            {
-                await _repository.CreateEmployeeAsync(employee);
-            }
-            catch (Exception e)
-            {
-
-            }
+            if(string.IsNullOrWhiteSpace(employee.Email)) throw new InvalidArgumentException(nameof(employee.Email), Convert.ToString(employee.Email));
+            if(string.IsNullOrWhiteSpace(employee.FirstName)) throw new InvalidArgumentException(nameof(employee.Email), Convert.ToString(employee.Email));
+            if(string.IsNullOrWhiteSpace(employee.Phone)) throw new InvalidArgumentException(nameof(employee.Email), Convert.ToString(employee.Email));
+            if(string.IsNullOrWhiteSpace(employee.Designation)) throw new InvalidArgumentException(nameof(employee.Email), Convert.ToString(employee.Email));
+            return await _repository.CreateEmployeeAsync(employee);
         }
 
         public async Task DeleteEmployeeAsync(int employeeId)
         {
-            try
-            {
-                await _repository.DeleteEmployeeAsync(employeeId);
-            }
-            catch (Exception e)
-            {
-
-            }
+            if(employeeId <= 0) throw new InvalidArgumentException(nameof(employeeId), Convert.ToString(employeeId));
+            await _repository.DeleteEmployeeAsync(employeeId);
         }
 
         public async Task<Employee> GetEmployeeAsync(int employeeId)
-        {
-            try
-            {
-                return await _repository.GetEmployeeAsync(employeeId);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+        {  
+            if(employeeId <= 0) throw new InvalidArgumentException(nameof(employeeId), Convert.ToString(employeeId));
+            var employee = await _repository.GetEmployeeAsync(employeeId);
+            if(employee == null) throw new EntityNotFoundException(nameof(Employee), employeeId);
+            return employee;
         }
 
         public async Task UpdateEmployeeAsync(int employeeId, Employee employee)
         {
-            try
-            {
-                await _repository.UpdateEmployeeAsync(employeeId, employee);
-            }
-            catch (Exception e)
-            {
-
-            }
+            if(employeeId <= 0) throw new InvalidArgumentException(nameof(employeeId), Convert.ToString(employeeId));
+            await _repository.UpdateEmployeeAsync(employeeId, employee);
         }
     }
 }

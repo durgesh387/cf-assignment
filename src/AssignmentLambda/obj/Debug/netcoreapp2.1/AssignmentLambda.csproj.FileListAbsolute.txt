@@ -9,3 +9,14 @@ D:\trial-projects\AssignmentLambda\src\AssignmentLambda\obj\Debug\netcoreapp2.1\
 D:\trial-projects\AssignmentLambda\src\AssignmentLambda\obj\Debug\netcoreapp2.1\AssignmentLambda.AssemblyInfo.cs
 D:\trial-projects\AssignmentLambda\src\AssignmentLambda\obj\Debug\netcoreapp2.1\AssignmentLambda.dll
 D:\trial-projects\AssignmentLambda\src\AssignmentLambda\obj\Debug\netcoreapp2.1\AssignmentLambda.pdb
+D:\projects\cf-assignment\src\AssignmentLambda\bin\Debug\netcoreapp2.1\AssignmentLambda.deps.json
+D:\projects\cf-assignment\src\AssignmentLambda\bin\Debug\netcoreapp2.1\AssignmentLambda.runtimeconfig.json
+D:\projects\cf-assignment\src\AssignmentLambda\bin\Debug\netcoreapp2.1\AssignmentLambda.runtimeconfig.dev.json
+D:\projects\cf-assignment\src\AssignmentLambda\bin\Debug\netcoreapp2.1\AssignmentLambda.dll
+D:\projects\cf-assignment\src\AssignmentLambda\bin\Debug\netcoreapp2.1\AssignmentLambda.pdb
+D:\projects\cf-assignment\src\AssignmentLambda\obj\Debug\netcoreapp2.1\AssignmentLambda.csprojAssemblyReference.cache
+D:\projects\cf-assignment\src\AssignmentLambda\obj\Debug\netcoreapp2.1\AssignmentLambda.csproj.CoreCompileInputs.cache
+D:\projects\cf-assignment\src\AssignmentLambda\obj\Debug\netcoreapp2.1\AssignmentLambda.AssemblyInfoInputs.cache
+D:\projects\cf-assignment\src\AssignmentLambda\obj\Debug\netcoreapp2.1\AssignmentLambda.AssemblyInfo.cs
+D:\projects\cf-assignment\src\AssignmentLambda\obj\Debug\netcoreapp2.1\AssignmentLambda.dll
+D:\projects\cf-assignment\src\AssignmentLambda\obj\Debug\netcoreapp2.1\AssignmentLambda.pdb

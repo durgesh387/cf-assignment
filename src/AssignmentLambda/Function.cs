@@ -29,7 +29,7 @@ namespace AssignmentLambda
         /// </summary>
         /// <param name="request"></param>
         /// <returns>The list of blogs</returns>
-        public APIGatewayProxyResponse Get(APIGatewayProxyRequest request, ILambdaContext context)
+        public async Task<APIGatewayProxyResponse> GetAsync(APIGatewayProxyRequest request, ILambdaContext context)
         {
             context.Logger.LogLine("Get Employee Request\n");
             string employeeIdString = null;
@@ -41,35 +41,68 @@ namespace AssignmentLambda
                 employeeIdString = request?.QueryStringParameters["employee_id"];
             if (Int32.TryParse(employeeIdString, out int num))
                 employeeId = num;
-            var result = _employeeService.GetEmployeeAsync(employeeId);
 
-            var response = new APIGatewayProxyResponse
+            Employee employee;
+            try
+            {
+                employee = await  _employeeService.GetEmployeeAsync(employeeId);
+            }
+            catch(InvalidArgumentException ex)
+            {
+                return new APIGatewayProxyResponse
+                {
+                    StatusCode = (int)HttpStatusCode.BadRequest,
+                    Body = ex.Message,
+                    Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
+                };
+            }
+            catch(EntityNotFoundException ex)
+            {
+                return new APIGatewayProxyResponse
+                {
+                    StatusCode = (int)HttpStatusCode.NotFound,
+                    Body = ex.Message,
+                    Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
+                };
+            }
+
+            return new APIGatewayProxyResponse
             {
                 StatusCode = (int)HttpStatusCode.OK,
-                Body = "I am an employee",
+                Body = JsonConvert.SerializeObject(employee),
                 Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
             };
-
-            return response;
         }
 
-        public APIGatewayProxyResponse Create(APIGatewayProxyRequest request, ILambdaContext context)
+        public async Task<APIGatewayProxyResponse> CreateAsync(APIGatewayProxyRequest request, ILambdaContext context)
         {
             context.Logger.LogLine("Create Employee Request\n");
             var employee = request.Body != null ? JsonConvert.DeserializeObject<Employee>(request.Body) : null;
             //var employee = JsonConvert.DeserializeObject<Employee>(request.Body ?? "{\"message\": \"ERROR: No Payload\"}");
-            _employeeService.CreateEmployeeAsync(employee);
-
-            var response = new APIGatewayProxyResponse
+            int employeeId;
+            try
+            {
+                employeeId = await _employeeService.CreateEmployeeAsync(employee);
+            }
+            catch(InvalidArgumentException ex)
+            {
+                return new APIGatewayProxyResponse
+                {
+                    StatusCode = (int)HttpStatusCode.BadRequest,
+                    Body = ex.Message,
+                    Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
+                };
+            }
+            
+            return new APIGatewayProxyResponse
             {
                 StatusCode = (int)HttpStatusCode.Created,
-                Body = "employee created",
+                Body = $"employee created with Id : {employeeId}",
                 Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
             };
-            return response;
         }
 
-        public APIGatewayProxyResponse Update(APIGatewayProxyRequest request, ILambdaContext context)
+        public async Task<APIGatewayProxyResponse> UpdateAsync(APIGatewayProxyRequest request, ILambdaContext context)
         {
             context.Logger.LogLine("Update Employee Request\n");
             string employeeIdString = null;
@@ -82,19 +115,29 @@ namespace AssignmentLambda
                 employeeIdString = request?.QueryStringParameters["employee_id"];
             if (Int32.TryParse(employeeIdString, out int num))
                 employeeId = num;
-            _employeeService.UpdateEmployeeAsync(employeeId, employee);
 
-            var response = new APIGatewayProxyResponse
+            try{
+               await _employeeService.UpdateEmployeeAsync(employeeId, employee);
+            }
+            catch(InvalidArgumentException ex)
+            {
+                return new APIGatewayProxyResponse
+                {
+                    StatusCode = (int)HttpStatusCode.BadRequest,
+                    Body = ex.Message,
+                    Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
+                };
+            }    
+            
+            return new APIGatewayProxyResponse
             {
                 StatusCode = (int)HttpStatusCode.OK,
                 Body = "employee updated",
                 Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
             };
-
-            return response;
         }
 
-        public APIGatewayProxyResponse Delete(APIGatewayProxyRequest request, ILambdaContext context)
+        public async Task<APIGatewayProxyResponse> DeleteAsync(APIGatewayProxyRequest request, ILambdaContext context)
         {
             context.Logger.LogLine("Delete Employee Request\n");
             string employeeIdString = null;
@@ -106,16 +149,27 @@ namespace AssignmentLambda
                 employeeIdString = request?.QueryStringParameters["employee_id"];
             if (Int32.TryParse(employeeIdString, out int num))
                 employeeId = num;
-            _employeeService.DeleteEmployeeAsync(employeeId);
 
-            var response = new APIGatewayProxyResponse
+            try
+            {
+                await _employeeService.DeleteEmployeeAsync(employeeId);
+            }
+            catch(InvalidArgumentException ex)
+            {
+                return new APIGatewayProxyResponse
+                {
+                    StatusCode = (int)HttpStatusCode.BadRequest,
+                    Body = ex.Message,
+                    Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
+                };
+            }
+
+            return new APIGatewayProxyResponse
             {
                 StatusCode = (int)HttpStatusCode.OK,
                 Body = "employee deleted",
                 Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
             };
-
-            return response;
         }
     }
 }

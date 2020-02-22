@@ -1,3 +1,6 @@
+using System;
+using System.Data;
+using System.Data.Common;
 using System.Threading.Tasks;
 using AssignmentLambda.Entities;
 using MySql.Data;
@@ -7,33 +10,102 @@ namespace AssignmentLambda
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-
-        public static MySqlConnection dbConnection;
-        static string host = "assignment-rds.c5zwy39fcyex.ap-south-1.rds.amazonaws.com";
-        static string id = "awsuser387";
-        static string password = "password1234";
-        static string port = "3306";
-        static string database = "trial_database";
-
-        string connectionString = string.Format("Server = {0};port={4};Database = {1}; User ID = {2}; Password = {3};", host, database, id, password, port);
-        public async Task CreateEmployeeAsync(Employee employee)
+        private const string Host = "assignment-rds.c5zwy39fcyex.ap-south-1.rds.amazonaws.com";
+        private const string UserId = "awsuser387";
+        private const string Password = "password1234";
+        private const string Port = "3306";
+        private const string Database = "trial_database";
+        private static string ConnectionString = $"Server = {Host};port={Port};Database = {Database}; User ID = {UserId}; Password = {Password};";
+        
+        public async Task<int> CreateEmployeeAsync(Employee employee)
         {
-            throw new System.NotImplementedException();
+            using(MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                using(MySqlCommand command = new MySqlCommand())
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Connection = connection;
+                    command.CommandText = Routines.CreateEmployee;
+                    command.Parameters.AddWithValue("vId", Guid.NewGuid());
+                    AddEmployeeCommandParams(command, employee);
+                    return Convert.ToInt32(await command.ExecuteScalarAsync());
+                }
+            }
+        }
+
+        private void AddEmployeeCommandParams(MySqlCommand command, Employee employee)
+        {
+            command.Parameters.AddWithValue("vFirstName", employee.FirstName);
+            command.Parameters.AddWithValue("vLastName", employee.LastName);
+            command.Parameters.AddWithValue("vEmail", employee.Email);
+            command.Parameters.AddWithValue("vPhone", employee.Phone);
+            command.Parameters.AddWithValue("vDesignation", employee.Designation);
+            command.Parameters.AddWithValue("vAddress", employee.Address);
         }
 
         public async Task DeleteEmployeeAsync(int employeeId)
         {
-            throw new System.NotImplementedException();
+            using(MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                using(MySqlCommand command = new MySqlCommand())
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Connection = connection;
+                    command.CommandText = Routines.DeleteEmployee;
+                    command.Parameters.AddWithValue("vEmployeeId", employeeId);
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
         }
 
         public async Task<Employee> GetEmployeeAsync(int employeeId)
         {
-            throw new System.NotImplementedException();
+            using(MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                using(MySqlCommand command = new MySqlCommand())
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Connection = connection;
+                    command.CommandText = Routines.UpdateEmployee;
+                    command.Parameters.AddWithValue("vEmployeeId", employeeId);
+                    using(DbDataReader dr = await command.ExecuteReaderAsync())
+                    {
+                        return await ReadEmployeeAsync(dr);
+                    }
+                }
+            }
         }
 
-        public Task UpdateEmployeeAsync(int employeeId, Employee employee)
+        private async Task<Employee> ReadEmployeeAsync(DbDataReader dr)
         {
-            throw new System.NotImplementedException();
+            Employee employee = null;
+            if(await dr.ReadAsync())
+            {
+                employee.EmployeeId = Convert.ToInt32(dr["employee_id"]);
+                employee.FirstName = Convert.ToString(dr["first_name"]);
+                employee.LastName = Convert.ToString(dr["last_name"]);
+                employee.Email = Convert.ToString(dr["email"]);
+                employee.Phone = Convert.ToString(dr["phone"]);
+                employee.Designation = Convert.ToString(dr["designation"]);
+                employee.Address = Convert.ToString(dr["address"]);
+            }
+            return employee;
+        }
+
+        public async Task UpdateEmployeeAsync(int employeeId, Employee employee)
+        {
+            using(MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                using(MySqlCommand command = new MySqlCommand())
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Connection = connection;
+                    command.CommandText = Routines.UpdateEmployee;
+                    command.Parameters.AddWithValue("vEmployeeId", employeeId);
+                    AddEmployeeCommandParams(command, employee);
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
         }
     }
 }
