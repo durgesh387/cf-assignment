@@ -1,0 +1,11 @@
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\bin\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.deps.json
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\bin\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.runtimeconfig.json
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\bin\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.runtimeconfig.dev.json
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\bin\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.dll
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\bin\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.pdb
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\obj\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.csprojAssemblyReference.cache
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\obj\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.csproj.CoreCompileInputs.cache
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\obj\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.AssemblyInfoInputs.cache
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\obj\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.AssemblyInfo.cs
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\obj\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.dll
+D:\trial-projects\AssignmentLambda\src\AssignmentLambda\obj\Release\netcoreapp2.1\rhel.7.2-x64\AssignmentLambda.pdb

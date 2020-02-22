@@ -32,7 +32,7 @@ namespace AssignmentLambda.Tests
             context = new TestLambdaContext();
             response = functions.Get(request, context);
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("Hello AWS Serverless", response.Body);
+            Assert.Equal("I am an employee", response.Body);
         }
     }
 }

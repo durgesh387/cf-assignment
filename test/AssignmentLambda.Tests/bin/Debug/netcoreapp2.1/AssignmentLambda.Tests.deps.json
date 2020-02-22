@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "35acf981249e00f4ba8c7d4390c0579ecfc5270b"
+    "signature": "2086e9055ee6cb7c8b33d68d5c0046b5bc3f1459"
   },
   "compilationOptions": {},
   "targets": {
@@ -407,6 +407,14 @@
           "runtime/win/lib/_._": {
             "rid": "win",
             "assetType": "runtime"
+          }
+        }
+      },
+      "MySql.Data/6.2.5": {
+        "runtime": {
+          "lib/net20/mysql.data.dll": {
+            "assemblyVersion": "6.2.5.0",
+            "fileVersion": "6.2.5.0"
           }
         }
       },
@@ -1103,7 +1111,8 @@
         "dependencies": {
           "Amazon.Lambda.APIGatewayEvents": "1.2.0",
           "Amazon.Lambda.Core": "1.1.0",
-          "Amazon.Lambda.Serialization.Json": "1.7.0"
+          "Amazon.Lambda.Serialization.Json": "1.7.0",
+          "MySql.Data": "6.2.5"
         },
         "runtime": {
           "AssignmentLambda.dll": {}
@@ -1207,6 +1216,13 @@
       "sha512": "sha512-q+eLtROUAQ3OxYA5mpQrgyFgzLQxIyrfT2eLpYX5IEPlHmIio2nh4F5bgOaQoGOV865kFKZZso9Oq9RlazvXtg==",
       "path": "microsoft.win32.registry/4.0.0",
       "hashPath": "microsoft.win32.registry.4.0.0.nupkg.sha512"
+    },
+    "MySql.Data/6.2.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UaLyfaGsXK4O68+GFTU9xulEdlXO0QMN/SCfFF6osKvJ1KZZ6O7lfirDyIcJeQ8z9g5EFT1KEvYt//mUlH51EA==",
+      "path": "mysql.data/6.2.5",
+      "hashPath": "mysql.data.6.2.5.nupkg.sha512"
     },
     "Newtonsoft.Json/9.0.1": {
       "type": "package",

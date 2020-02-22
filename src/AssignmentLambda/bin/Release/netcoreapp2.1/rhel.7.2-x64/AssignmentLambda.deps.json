@@ -1,11 +1,12 @@
 {
   "runtimeTarget": {
-    "name": ".NETCoreApp,Version=v2.1",
+    "name": ".NETCoreApp,Version=v2.1/rhel.7.2-x64",
     "signature": "645772bc2ca8edfaf506d9092504101985618ab2"
   },
   "compilationOptions": {},
   "targets": {
-    ".NETCoreApp,Version=v2.1": {
+    ".NETCoreApp,Version=v2.1": {},
+    ".NETCoreApp,Version=v2.1/rhel.7.2-x64": {
       "AssignmentLambda/1.0.0": {
         "dependencies": {
           "Amazon.Lambda.APIGatewayEvents": "1.2.0",

@@ -609,6 +609,15 @@
           }
         }
       },
+      "MySql.Data/6.2.5": {
+        "type": "package",
+        "compile": {
+          "lib/net20/mysql.data.dll": {}
+        },
+        "runtime": {
+          "lib/net20/mysql.data.dll": {}
+        }
+      },
       "NETStandard.Library/2.0.3": {
         "type": "package",
         "dependencies": {
@@ -1730,7 +1739,8 @@
         "dependencies": {
           "Amazon.Lambda.APIGatewayEvents": "1.2.0",
           "Amazon.Lambda.Core": "1.1.0",
-          "Amazon.Lambda.Serialization.Json": "1.7.0"
+          "Amazon.Lambda.Serialization.Json": "1.7.0",
+          "MySql.Data": "5.7.26"
         },
         "compile": {
           "bin/placeholder/AssignmentLambda.dll": {}
@@ -2543,6 +2553,19 @@
         "runtimes/win/lib/net46/Microsoft.Win32.Registry.dll",
         "runtimes/win/lib/netcore50/_._",
         "runtimes/win/lib/netstandard1.3/Microsoft.Win32.Registry.dll"
+      ]
+    },
+    "MySql.Data/6.2.5": {
+      "sha512": "UaLyfaGsXK4O68+GFTU9xulEdlXO0QMN/SCfFF6osKvJ1KZZ6O7lfirDyIcJeQ8z9g5EFT1KEvYt//mUlH51EA==",
+      "type": "package",
+      "path": "mysql.data/6.2.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20-cf/mysql.data.cf.dll",
+        "lib/net20/mysql.data.dll",
+        "mysql.data.6.2.5.nupkg.sha512",
+        "mysql.data.nuspec"
       ]
     },
     "NETStandard.Library/2.0.3": {
@@ -6035,5 +6058,27 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "AssignmentLambda depends on MySql.Data (>= 5.7.26) but MySql.Data 5.7.26 was not found. An approximate best match of MySql.Data 6.2.5 was resolved.",
+      "libraryId": "MySql.Data",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MySql.Data 6.2.5' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
+      "libraryId": "MySql.Data",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    }
+  ]
 }

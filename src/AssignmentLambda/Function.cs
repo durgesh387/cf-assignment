@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.APIGatewayEvents;
 using AssignmentLambda.Entities;
+using Newtonsoft.Json;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
@@ -30,7 +31,7 @@ namespace AssignmentLambda
         /// <returns>The list of blogs</returns>
         public APIGatewayProxyResponse Get(APIGatewayProxyRequest request, ILambdaContext context)
         {
-            context.Logger.LogLine("Get Request\n");
+            context.Logger.LogLine("Get Employee Request\n");
             string employeeIdString = null;
             int employeeId = 0;
             if (request.PathParameters != null && request.PathParameters.ContainsKey("employee_id"))
@@ -54,12 +55,14 @@ namespace AssignmentLambda
 
         public APIGatewayProxyResponse Create(APIGatewayProxyRequest request, ILambdaContext context)
         {
-            context.Logger.LogLine("Get Request\n");
-            _employeeService.CreateEmployeeAsync(new Employee());
+            context.Logger.LogLine("Create Employee Request\n");
+            var employee = request.Body != null ? JsonConvert.DeserializeObject<Employee>(request.Body) : null;
+            //var employee = JsonConvert.DeserializeObject<Employee>(request.Body ?? "{\"message\": \"ERROR: No Payload\"}");
+            _employeeService.CreateEmployeeAsync(employee);
 
             var response = new APIGatewayProxyResponse
             {
-                StatusCode = (int)HttpStatusCode.OK,
+                StatusCode = (int)HttpStatusCode.Created,
                 Body = "employee created",
                 Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
             };
@@ -68,9 +71,10 @@ namespace AssignmentLambda
 
         public APIGatewayProxyResponse Update(APIGatewayProxyRequest request, ILambdaContext context)
         {
-            context.Logger.LogLine("Get Request\n");
+            context.Logger.LogLine("Update Employee Request\n");
             string employeeIdString = null;
             int employeeId = 0;
+            var employee = request.Body != null ? JsonConvert.DeserializeObject<Employee>(request.Body) : null;
             if (request.PathParameters != null && request.PathParameters.ContainsKey("employee_id"))
                 employeeIdString = request.PathParameters["employee_id"];
 
@@ -78,7 +82,7 @@ namespace AssignmentLambda
                 employeeIdString = request?.QueryStringParameters["employee_id"];
             if (Int32.TryParse(employeeIdString, out int num))
                 employeeId = num;
-            _employeeService.UpdateEmployeeAsync(employeeId, new Employee());
+            _employeeService.UpdateEmployeeAsync(employeeId, employee);
 
             var response = new APIGatewayProxyResponse
             {
@@ -92,7 +96,7 @@ namespace AssignmentLambda
 
         public APIGatewayProxyResponse Delete(APIGatewayProxyRequest request, ILambdaContext context)
         {
-            context.Logger.LogLine("Get Request\n");
+            context.Logger.LogLine("Delete Employee Request\n");
             string employeeIdString = null;
             int employeeId = 0;
             if (request.PathParameters != null && request.PathParameters.ContainsKey("employee_id"))

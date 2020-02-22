@@ -20,7 +20,7 @@
 					"RootGet": {
 						"Type": "Api",
 						"Properties": {
-							"Path": "/",
+							"Path": "/employees/{employee_id}",
 							"Method": "GET"
 						}
 					}
@@ -43,7 +43,7 @@
 					"RootGet": {
 						"Type": "Api",
 						"Properties": {
-							"Path": "/",
+							"Path": "/employees",
 							"Method": "POST"
 						}
 					}
@@ -54,7 +54,7 @@
 		"Update" : {
 			"Type" : "AWS::Serverless::Function",
 			"Properties": {
-				"Handler": "AssignmentLambda::AssignmentLambda.Functions::Get",
+				"Handler": "AssignmentLambda::AssignmentLambda.Functions::Update",
 				"Runtime": "dotnetcore2.1",
 				"CodeUri": "",
 				"Description": "Function to update an employee by id",
@@ -66,7 +66,7 @@
 					"RootGet": {
 						"Type": "Api",
 						"Properties": {
-							"Path": "/",
+							"Path": "/employees/{employee_id}",
 							"Method": "PUT"
 						}
 					}
@@ -77,7 +77,7 @@
 		"Delete" : {
 			"Type" : "AWS::Serverless::Function",
 			"Properties": {
-				"Handler": "AssignmentLambda::AssignmentLambda.Functions::Get",
+				"Handler": "AssignmentLambda::AssignmentLambda.Functions::Delete",
 				"Runtime": "dotnetcore2.1",
 				"CodeUri": "",
 				"Description": "Function to delete an employee by id",
@@ -89,7 +89,7 @@
 					"RootGet": {
 						"Type": "Api",
 						"Properties": {
-							"Path": "/",
+							"Path": "/employees/{employee_id}",
 							"Method": "DELETE"
 						}
 					}
