@@ -63,6 +63,7 @@ namespace AssignmentLambda
 
         public async Task DeleteEmployeeAsync(int employeeId)
         {
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 await connection.OpenAsync();
@@ -79,6 +80,7 @@ namespace AssignmentLambda
 
         public async Task<Employee> GetEmployeeAsync(int employeeId)
         {
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 await connection.OpenAsync();
@@ -114,6 +116,7 @@ namespace AssignmentLambda
 
         public async Task UpdateEmployeeAsync(int employeeId, Employee employee)
         {
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 await connection.OpenAsync();
