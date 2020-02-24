@@ -48,6 +48,7 @@ namespace AssignmentLambda
             if (Int32.TryParse(employeeIdString, out int num))
                 employeeId = num;
 
+            context.Logger.LogLine($"employee id is : {employeeId}");
             Employee employee;
             try
             {

@@ -30,6 +30,7 @@ namespace AssignmentLambda
         public async Task<Employee> GetEmployeeAsync(int employeeId)
         {
             if (employeeId <= 0) throw new InvalidArgumentException(nameof(employeeId), Convert.ToString(employeeId));
+            LambdaLogger.Log($"going to get employee with id as : {employeeId}");
             var employee = await _repository.GetEmployeeAsync(employeeId);
             if (employee == null) throw new EntityNotFoundException(nameof(Employee), employeeId);
             return employee;

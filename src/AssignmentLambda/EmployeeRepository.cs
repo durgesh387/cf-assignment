@@ -80,18 +80,22 @@ namespace AssignmentLambda
 
         public async Task<Employee> GetEmployeeAsync(int employeeId)
         {
+            LambdaLogger.Log("inside the repo function");
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
+                LambdaLogger.Log("connection established");
                 await connection.OpenAsync();
                 using (MySqlCommand command = new MySqlCommand())
                 {
+                    LambdaLogger.Log("setting variables");
                     command.CommandType = CommandType.StoredProcedure;
                     command.Connection = connection;
-                    command.CommandText = Routines.UpdateEmployee;
+                    command.CommandText = Routines.GetEmployee;
                     command.Parameters.AddWithValue("vEmployeeId", employeeId);
                     using (DbDataReader dr = await command.ExecuteReaderAsync())
                     {
+                        LambdaLogger.Log("going to read employee");
                         return await ReadEmployeeAsync(dr);
                     }
                 }
@@ -103,6 +107,8 @@ namespace AssignmentLambda
             Employee employee = null;
             if (await dr.ReadAsync())
             {
+                LambdaLogger.Log("reading employee");
+                employee = new Employee();
                 employee.EmployeeId = Convert.ToInt32(dr["employee_id"]);
                 employee.FirstName = Convert.ToString(dr["first_name"]);
                 employee.LastName = Convert.ToString(dr["last_name"]);
@@ -110,6 +116,7 @@ namespace AssignmentLambda
                 employee.Phone = Convert.ToString(dr["phone"]);
                 employee.Designation = Convert.ToString(dr["designation"]);
                 employee.Address = Convert.ToString(dr["address"]);
+                LambdaLogger.Log("read complete");
             }
             return employee;
         }
