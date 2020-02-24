@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
+using Amazon.Lambda.Core;
 using AssignmentLambda.Entities;
 using MySql.Data;
 using MySql.Data.MySqlClient;
@@ -15,21 +16,39 @@ namespace AssignmentLambda
         private const string Password = "password1234";
         private const string Port = "3306";
         private const string Database = "trial_database";
-        private static string ConnectionString = $"Server = {Host};port={Port};Database = {Database}; User ID = {UserId}; Password = {Password};";
+        private static string ConnectionString = $"server={Host};user id={UserId}; password={Password};port={Port};database={Database}; ";
 
         public async Task<int> CreateEmployeeAsync(Employee employee)
         {
+            LambdaLogger.Log("inside the repo function");
+            //try
+            //{
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
+                LambdaLogger.Log("connection established");
+                await connection.OpenAsync();
                 using (MySqlCommand command = new MySqlCommand())
                 {
+                    LambdaLogger.Log("setting variables");
                     command.CommandType = CommandType.StoredProcedure;
                     command.Connection = connection;
                     command.CommandText = Routines.CreateEmployee;
                     AddEmployeeCommandParams(command, employee);
-                    return Convert.ToInt32(await command.ExecuteScalarAsync());
+                    var employeeId = await command.ExecuteScalarAsync();
+                    LambdaLogger.Log($"employee created with id as : {Convert.ToInt32(employeeId)}");
+                    return Convert.ToInt32(employeeId);
                 }
             }
+            //}
+            // catch (Exception ex)
+            // {
+            //     LambdaLogger.Log(ex.ToString());
+            //     LambdaLogger.Log(ex.Message);
+            //     LambdaLogger.Log(ex.StackTrace);
+            //     return 0;
+            // }
+
         }
 
         private void AddEmployeeCommandParams(MySqlCommand command, Employee employee)
@@ -46,6 +65,7 @@ namespace AssignmentLambda
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
+                await connection.OpenAsync();
                 using (MySqlCommand command = new MySqlCommand())
                 {
                     command.CommandType = CommandType.StoredProcedure;
@@ -61,6 +81,7 @@ namespace AssignmentLambda
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
+                await connection.OpenAsync();
                 using (MySqlCommand command = new MySqlCommand())
                 {
                     command.CommandType = CommandType.StoredProcedure;
@@ -95,6 +116,7 @@ namespace AssignmentLambda
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
+                await connection.OpenAsync();
                 using (MySqlCommand command = new MySqlCommand())
                 {
                     command.CommandType = CommandType.StoredProcedure;
